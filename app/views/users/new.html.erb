@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+
+</head>
+<body>
+  <div style="background-color: grey; min-height: 100vh; padding-top: 250px;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card border-success">
+            <div class="card-header bg-success text-white">SignUp</div>
+
+          </div>
+          <div class="card-body bg-light">
+            <%= form_with(model: @user, url: users_path, local: true) do |form| %>
+
+              <% if @user.errors.any? %>
+                <div class="alert alert-danger">
+                  <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+                  <ul>
+                    <% @user.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="form-group">
+                <%= form.label :email %>
+                <%= form.email_field :email, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :password %>
+                <%= form.password_field :password, class: 'form-control', id: 'password' %>
+                <!-- Changed the icon to a different one, for example, fa-key -->
+                <i class="fas fa-key password-icon" onclick="togglePasswordVisibility('password')"></i>
+              </div>
+                <div class="form-group">
+                  <%= form.label :password_confirmation %>
+                  <%= form.password_field :password_confirmation, class: 'form-control', id: 'password-confirm' %>
+                  <!-- Changed the icon to a different one, for example, fa-key -->
+                  <i class="fas fa-key password-icon" onclick="togglePasswordVisibility('password-confirm')"></i>
+                </div>
+
+              <div class="actions">
+                <%= form.submit "Sign Up", class: 'btn btn-primary', style: 'background-color: purple;' %>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-footer text-muted text-center bg-light">
+            Already have an account? <%= link_to 'Login', login_path, class: 'text-success' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePasswordVisibility(fieldId) {
+      var field = document.getElementById(fieldId);
+      var icon = field.nextElementSibling;
+      if (field.type === "password") {
+        field.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        field.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  </script>
+</body>
+</html>

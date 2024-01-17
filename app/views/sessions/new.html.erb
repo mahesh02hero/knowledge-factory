@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- ... your existing head content ... -->
+  <style>
+    body {
+      background-color: grey; /* Fullscreen grey background */
+      height: 100vh; /* Full viewport height */
+      width: 100vw; /* Full viewport width */
+    }
+    /* Other styles as necessary */
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-success text-white">Log In</div>
+        <div class="card-body">
+
+          <%= form_with(url: login_path, local: true, class: "form-login") do |form| %>
+            <% if flash[:danger] %>
+              <div class="alert alert-danger">
+                <%= flash[:danger] %>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= form.label :email, class: "text-primary" %>
+              <%= form.email_field :email, class: "form-control", placeholder: "Email" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :password, class: "text-info" %>
+              <%= form.password_field :password, class: "form-control", placeholder: "Password" %>
+            </div>
+
+            <div class="actions text-center">
+              <%= form.submit "Log in", class: "btn btn-warning text-dark" %>
+            </div>
+
+            <!-- Create New Account Button -->
+            <div class="text-center mt-3">
+            <%= link_to 'Create new account', new_user_path, class: 'btn btn-success' %>
+            </div>
+
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
